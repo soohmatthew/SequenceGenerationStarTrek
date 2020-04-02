@@ -98,11 +98,19 @@ if __name__ == "__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     learning_rate = 0.0005
     optimizer = torch.optim.Adam(rnn.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [1,2,3,4], gamma=0.5, last_epoch=-1)
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [1,2,3,4,5,6,7,8,9], gamma=0.5, last_epoch=-1)
 
     # Run on training and validation set
     if training:
         all_losses, all_acc, all_val_losses, all_val_acc = run(epochs, rnn, train_category_lines, valid_category_lines, criterion, device, optimizer, scheduler, print_every, sample_every)
+
+    # Save model   
+    cwd = os.getcwd()
+
+    if not os.path.exists(os.path.join(cwd,'model')):
+        os.makedirs(os.path.join(cwd,'model'))
+
+    torch.save(rnn.state_dict(), f"model/model_lstm_{str(time.ctime()).replace(':','').replace('  ',' ').replace(' ','_') }.pth")
 
     # Plot results
     if plotting:

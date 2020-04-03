@@ -111,7 +111,7 @@ if __name__ == "__main__":
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1) # Ignore the padding index -1
     learning_rate = 0.001
     optimizer = torch.optim.Adam(stLSTM.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [1,2,3,4,5,6,7,8,9], gamma=0.5)
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [5, 7, 9], gamma=0.5)
 
     # # Run on training and validation set
     # if training:

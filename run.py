@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     train_percent = 0.8
     valid_percent = 0.1
-    batch_size = 1
+    batch_size = 16
 
     train_dataloader = iteratefromdict(category_lines, train = True, seed = 5, batch_size = batch_size)
     val_dataloader = iteratefromdict(category_lines, train = False, seed = 5, batch_size = batch_size)
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1) # Ignore the padding index -1
     learning_rate = 0.001
     optimizer = torch.optim.Adam(stLSTM.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [1,2,3,4], gamma=0.5)
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [1,2,3,4,5,6,7,8,9], gamma=0.5)
 
     # # Run on training and validation set
     # if training:
@@ -133,7 +133,7 @@ if __name__ == "__main__":
                 optimizer = optimizer,
                 scheduler = scheduler,
                 batch_size = batch_size,
-                num_epochs = 2,
+                num_epochs = 10,
                 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
                 logger = logging,
                 verbose = True,

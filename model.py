@@ -165,8 +165,9 @@ def train_model(train_dataloader,
         valid_logs = valid_epoch.run(validation_dataloader)
         losses['val'].append(valid_logs['loss'])
         metric_values['val']['Accuracy'].append(valid_logs['Accuracy'])
-
-        log_print(model.sample_sentence(), logger)
+        
+        for _ in range(20):
+            log_print(model.sample_sentence(), logger)
 
         if scheduler is not None:
             scheduler.step()

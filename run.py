@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     train_percent = 0.8
     valid_percent = 0.1
-    batch_size = 32
+    batch_size = 1
 
     train_dataloader = iteratefromdict(category_lines, train = True, seed = 5, batch_size = batch_size)
     val_dataloader = iteratefromdict(category_lines, train = False, seed = 5, batch_size = batch_size)

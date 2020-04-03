@@ -215,7 +215,7 @@ def get_data():
     all_categories = ['st']
     category_lines['st']=[]
     filterwords=['NEXTEPISODE']
-    with open('./star_trek_transcripts_all_episodes_f.csv', newline='') as csvfile:
+    with open('./star_trek_transcripts_all_episodes.csv', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='"')
         for row in reader:
             for el in row:
@@ -237,35 +237,6 @@ def targetTensor(line):
     letter_indexes = [all_letters.find(line[li]) for li in range(1, len(line))]
     letter_indexes.append(n_letters - 1) # EOS
     return torch.LongTensor(letter_indexes)
-
-# def timeSince(since):
-#     now = time.time()
-#     s = now - since
-#     m = math.floor(s / 60)
-#     s -= m * 60
-#     return '%dm %ds' % (m, s)
-
-# Sample from a category and starting letter
-# def sample(rnn, max_length = 200):
-#     rnn.cpu()
-#     caps_letters = 'ABCDEFGHIJKLMNOPRSTUVWZ'
-#     start_letter = caps_letters[np.random.choice(len(caps_letters))]
-#     with torch.no_grad():  # no need to track history in sampling
-#         input = inputTensor(start_letter)
-#         hidden = rnn.init_Hidden_n_Cell_sample()
-
-#         output_name = start_letter
-
-#         for _ in range(max_length):
-#             output, hidden = rnn(input, hidden, sample  = True)
-#             topi = np.random.choice(a = output.shape[1], size = output.shape[0], p = output.squeeze().numpy())[0]
-#             if topi == n_letters - 1:
-#                 break
-#             else:
-#                 letter = all_letters[topi]
-#                 output_name += letter
-#             input = inputTensor(letter)
-#         return output_name
 
 def plot(train_losses, val_losses, train_acc, val_acc):
     fig, ax = plt.subplots(1,2, figsize = (10,5))

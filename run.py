@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     train_percent = 0.8
     valid_percent = 0.1
-    batch_size = 16
+    batch_size = 32
 
     train_dataloader = iteratefromdict(category_lines, train = True, seed = 5, batch_size = batch_size)
     val_dataloader = iteratefromdict(category_lines, train = False, seed = 5, batch_size = batch_size)
@@ -93,8 +93,8 @@ if __name__ == "__main__":
     # Set params
     all_letters = string.ascii_letters + "0123456789 .,:!?'[]()/+-="
     n_letters = len(all_letters) + 1 # Plus EOS marker
-    n_layers = 2
-    hidden_size = 100
+    n_layers = 3
+    hidden_size = 300
     
     log_print(f'No. of layers: {n_layers}', logging)
     log_print(f'Hidden size: {hidden_size}', logging)
@@ -133,7 +133,7 @@ if __name__ == "__main__":
                 optimizer = optimizer,
                 scheduler = scheduler,
                 batch_size = batch_size,
-                num_epochs = 1,
+                num_epochs = 2,
                 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
                 logger = logging,
                 verbose = True,

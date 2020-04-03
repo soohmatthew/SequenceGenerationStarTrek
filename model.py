@@ -189,7 +189,7 @@ def train_model(train_dataloader,
     log_print(f'Time Taken to train: {dt.datetime.now()-start_time}', logger)
 
     # Implement plotting feature
-    plot(losses['train'],losses['val',metric_values['train']['Accuracy'],metric_values['val']['Accuracy'])
+    plot(losses['train'],losses['val'],metric_values['train']['Accuracy'],metric_values['val']['Accuracy'])
     log_print('Plot Saved', logger)
 
 # def train(input_line_tensor, target_line_tensor, criterion, device, optimizer, scheduler, rnn):

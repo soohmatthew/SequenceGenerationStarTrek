@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # stLSTM = torch.load(os.path.join(os.getcwd(),'model','best_model.pth'))
 
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1) # Ignore the padding index -1
-    learning_rate = 0.001
+    learning_rate = 0.005
     optimizer = torch.optim.Adam(stLSTM.parameters(), lr=learning_rate)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, 10, T_mult=1, eta_min=0)
     loss = torch.nn.CrossEntropyLoss(ignore_index=-1) # Ignore the padded class

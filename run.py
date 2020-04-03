@@ -109,9 +109,9 @@ if __name__ == "__main__":
     # sample_every = 1000
     # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1) # Ignore the padding index -1
-    learning_rate = 0.001
+    learning_rate = 0.005
     optimizer = torch.optim.Adam(stLSTM.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [5, 7, 9], gamma=0.5)
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [3, 5, 7, 9], gamma=0.5)
 
     # # Run on training and validation set
     # if training:

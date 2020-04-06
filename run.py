@@ -1,20 +1,25 @@
-from utils import *
-from model import *
+from utils import iteratefromdict, log_print, get_data
+from model import StarTrekLSTM, train_model
+
+import os
 import torch
 import logging
+import string
+import time
 
 if __name__ == "__main__":
     # Build the category_lines dictionary, a list of lines per category
     category_lines,all_categories = get_data()
     starting_time = time.time()
     category_lines = category_lines['st']
+    category_lines = [line for line in category_lines if len(line) < 400]
     
     training = True
     plotting = True 
 
     train_percent = 0.8
     valid_percent = 0.1
-    batch_size = 16
+    batch_size = 6
 
     train_dataloader = iteratefromdict(category_lines, train = True, seed = 5, batch_size = batch_size)
     val_dataloader = iteratefromdict(category_lines, train = False, seed = 5, batch_size = batch_size)
@@ -37,10 +42,8 @@ if __name__ == "__main__":
     log_print(f'No. of layers: {n_layers}', logging)
     log_print(f'Hidden size: {hidden_size}', logging)
 
-    stLSTM = StarTrekLSTM(input_size = n_letters,
-                        hidden_size = hidden_size,
-                        output_size = n_letters,
-                        n_layers = n_layers)
+    stLSTM = StarTrekLSTM(input_size = n_letters, hidden_size = hidden_size, output_size = n_letters, n_layers = n_layers)
+    # stLSTM = torch.load(os.path.join(os.getcwd(),'model','best_model.pth'))
 
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1) # Ignore the padding index -1
     learning_rate = 0.005
@@ -57,7 +60,7 @@ if __name__ == "__main__":
                 optimizer = optimizer,
                 scheduler = scheduler,
                 batch_size = batch_size,
-                num_epochs = 10,
+                num_epochs = 20,
                 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
                 logger = logging,
                 verbose = True,

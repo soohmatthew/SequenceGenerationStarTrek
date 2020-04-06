@@ -215,7 +215,7 @@ def get_data():
     all_categories = ['st']
     category_lines['st']=[]
     filterwords=['NEXTEPISODE']
-    with open('./star_trek_transcripts_all_episodes_f.csv', newline='') as csvfile:
+    with open('./star_trek_transcripts_all_episodes.csv', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='"')
         for row in reader:
             for el in row:

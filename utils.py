@@ -238,35 +238,6 @@ def targetTensor(line):
     letter_indexes.append(n_letters - 1) # EOS
     return torch.LongTensor(letter_indexes)
 
-# def timeSince(since):
-#     now = time.time()
-#     s = now - since
-#     m = math.floor(s / 60)
-#     s -= m * 60
-#     return '%dm %ds' % (m, s)
-
-# Sample from a category and starting letter
-# def sample(rnn, max_length = 200):
-#     rnn.cpu()
-#     caps_letters = 'ABCDEFGHIJKLMNOPRSTUVWZ'
-#     start_letter = caps_letters[np.random.choice(len(caps_letters))]
-#     with torch.no_grad():  # no need to track history in sampling
-#         input = inputTensor(start_letter)
-#         hidden = rnn.init_Hidden_n_Cell_sample()
-
-#         output_name = start_letter
-
-#         for _ in range(max_length):
-#             output, hidden = rnn(input, hidden, sample  = True)
-#             topi = np.random.choice(a = output.shape[1], size = output.shape[0], p = output.squeeze().numpy())[0]
-#             if topi == n_letters - 1:
-#                 break
-#             else:
-#                 letter = all_letters[topi]
-#                 output_name += letter
-#             input = inputTensor(letter)
-#         return output_name
-
 def plot(train_losses, val_losses, train_acc, val_acc):
     fig, ax = plt.subplots(1,2, figsize = (10,5))
     #fig.suptitle(f"Learning Rate: {optimizer.state_dict()['param_groups'][0]['lr']}, Max Epochs: {epochs} Batch size: {batch_size}, Hidden size: {hidden_size} n_layers: {n_layers} Model: {choice_of_model}")
